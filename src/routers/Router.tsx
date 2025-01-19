@@ -1,14 +1,24 @@
 import { createBrowserRouter } from 'react-router';
 import App from '../App.tsx';
-import Layout from '../Layout.tsx';
+import { PrivateLayout } from '../Layouts';
+import { ModulesContainer } from '../pages';
 
 export const router = createBrowserRouter([
 	{
-		Component: App, // root layout route
+		Component: App,
 		children: [
 			{
-				path: '/',
-				Component: Layout,
+				element: <PrivateLayout />,
+				children: [
+					{
+						path: '/',
+						element: <ModulesContainer />,
+					},
+					{
+						path: '/memberships/modules',
+						element: <ModulesContainer />,
+					},
+				],
 			},
 		],
 	},

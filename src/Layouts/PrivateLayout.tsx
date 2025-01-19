@@ -1,13 +1,13 @@
 import { Outlet } from 'react-router';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
-import { PageContainer } from '@toolpad/core/PageContainer';
+import { Box } from '@mui/material';
 
-export default function Layout() {
+export function PrivateLayout() {
 	return (
 		<DashboardLayout>
-			<PageContainer>
+			<Box component="main" sx={{ flexGrow: 1, p: 3 }}>
 				<Outlet />
-			</PageContainer>
+			</Box>
 		</DashboardLayout>
 	);
 }
