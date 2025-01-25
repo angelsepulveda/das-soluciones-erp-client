@@ -5,7 +5,8 @@ import { DataGridCustom } from '../../../../components';
 import { ModuleContext } from '../contexts';
 
 export const DataGridDesktopModule = () => {
-	const { handleOpen } = useContext(ModuleContext);
+	const { handleOpen, handleSetDelete, handleOpenDelete, handleEditModule } =
+		useContext(ModuleContext);
 
 	const data = useMemo(
 		() => [
@@ -20,6 +21,7 @@ export const DataGridDesktopModule = () => {
 			{
 				accessorKey: 'id',
 				header: 'ID',
+				visible: false,
 			},
 			{
 				accessorKey: 'name',
@@ -29,16 +31,17 @@ export const DataGridDesktopModule = () => {
 		[],
 	);
 
-	const handleAdd = () => {
+	const handleAdd = (): void => {
 		handleOpen();
 	};
 
-	const handleEdit = (row: { id: number; name: string }) => {
-		console.log('Editar', row);
+	const handleEdit = (row: { id: string; name: string }): void => {
+		handleEditModule(row.id, row.name);
 	};
 
-	const handleDelete = (row: { id: number; name: string }) => {
-		console.log('Eliminar', row);
+	const handleDelete = (row: { id: string; name: string }): void => {
+		handleSetDelete(row.id, row.name);
+		handleOpenDelete();
 	};
 
 	return (

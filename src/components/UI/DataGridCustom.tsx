@@ -14,8 +14,8 @@ interface GenericDataGridProps<T extends MRT_RowData> {
 	data: T[];
 	columns: MRT_ColumnDef<T>[];
 	onAdd?: () => void;
-	onEdit?: (row: T) => void;
-	onDelete?: (row: T) => void;
+	onEdit?: (row: { id: string; name: string }) => void;
+	onDelete?: (row: { id: string; name: string }) => void;
 }
 
 export const DataGridCustom = <T extends MRT_RowData>({
@@ -62,17 +62,27 @@ export const DataGridCustom = <T extends MRT_RowData>({
 				? ({ row }) => (
 						<Box sx={{ display: 'flex', gap: '1rem' }}>
 							{onEdit && (
-								<Tooltip title="Edit">
-									<IconButton onClick={() => onEdit(row.original)}>
+								<Tooltip title="Editar">
+									<IconButton
+										onClick={() => {
+											// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+											// @ts-expect-error
+											onEdit(row.original);
+										}}
+									>
 										<EditIcon />
 									</IconButton>
 								</Tooltip>
 							)}
 							{onDelete && (
-								<Tooltip title="Delete">
+								<Tooltip title="Eliminar">
 									<IconButton
 										color="error"
-										onClick={() => onDelete(row.original)}
+										onClick={() => {
+											// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+											// @ts-expect-error
+											onDelete(row.original);
+										}}
 									>
 										<DeleteIcon />
 									</IconButton>

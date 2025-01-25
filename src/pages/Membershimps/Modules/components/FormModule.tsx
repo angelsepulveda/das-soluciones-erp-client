@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { ModuleContext } from '../contexts';
 import { ModalCrud } from '../../../../components';
 import { Box } from '@mui/material';
@@ -19,14 +19,26 @@ type TFormValues = {
 };
 
 export const FormModule = () => {
-	const { open, handleOpen } = useContext(ModuleContext);
+	const { open, moduleEdit, handleOpenClose } = useContext(ModuleContext);
 
-	const { handleSubmit, control } = useForm<TFormValues>({
+	const { handleSubmit, control, setValue, reset } = useForm<TFormValues>({
 		resolver: yupResolver(validationSchema),
 		defaultValues: {
 			name: '',
 		},
 	});
+
+	useEffect(() => {
+		if (moduleEdit != null) {
+			setValue('name', moduleEdit.name);
+		}
+	}, [moduleEdit]);
+
+	useEffect(() => {
+		if (!open) {
+			reset();
+		}
+	}, [open]);
 
 	const onSubmit = (data: TFormValues) => {
 		console.log('onSubmit', data);
@@ -35,7 +47,7 @@ export const FormModule = () => {
 	return (
 		<ModalCrud
 			open={open}
-			handleSetOpen={handleOpen}
+			handleSetOpen={handleOpenClose}
 			title="Registrar modulo"
 			handleSubmit={handleSubmit(onSubmit)}
 		>
