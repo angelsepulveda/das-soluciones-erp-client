@@ -1,3 +1,4 @@
 export * from './PaperCustom';
 export * from './DataGridCustom';
-export * from './ModalCrud.tsx';
+export * from './ModalCrud';
+export * from './DeleteDialog';

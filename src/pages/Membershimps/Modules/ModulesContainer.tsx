@@ -1,4 +1,4 @@
-import { DataGridDesktopModule, FormModule } from './components';
+import { DataGridDesktopModule, DeleteModule, FormModule } from './components';
 import Grid from '@mui/material/Grid2';
 import { ModuleContextProvider } from './contexts';
 
@@ -10,6 +10,7 @@ export const ModulesContainer = () => {
 					<DataGridDesktopModule />
 				</Grid>
 				<FormModule />
+				<DeleteModule />
 			</Grid>
 		</ModuleContextProvider>
 	);
