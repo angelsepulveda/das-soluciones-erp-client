@@ -3,26 +3,17 @@ import { useContext, useMemo } from 'react';
 import { type MRT_ColumnDef } from 'material-react-table';
 import { DataGridCustom } from '../../../../components';
 import { ModuleContext } from '../contexts';
+import useSWR from 'swr';
+import { getAll, modulesEndpoint } from '../../../../services';
+import { TModuleDto } from '../../../../models';
 
 export const DataGridDesktopModule = () => {
 	const { handleOpen, handleSetDelete, handleOpenDelete, handleEditModule } =
 		useContext(ModuleContext);
+	const { data, isLoading } = useSWR(modulesEndpoint, getAll);
 
-	const data = useMemo(
+	const columns = useMemo<MRT_ColumnDef<TModuleDto>[]>(
 		() => [
-			{ id: 1, name: 'Module 1' },
-			{ id: 2, name: 'Module 2' },
-		],
-		[],
-	);
-
-	const columns = useMemo<MRT_ColumnDef<{ id: number; name: string }>[]>(
-		() => [
-			{
-				accessorKey: 'id',
-				header: 'ID',
-				visible: false,
-			},
 			{
 				accessorKey: 'name',
 				header: 'Nombre',
@@ -45,8 +36,9 @@ export const DataGridDesktopModule = () => {
 	};
 
 	return (
-		<DataGridCustom
-			data={data}
+		<DataGridCustom<TModuleDto>
+			isLoading={isLoading}
+			data={data ?? []}
 			columns={columns}
 			onAdd={handleAdd}
 			onEdit={handleEdit}

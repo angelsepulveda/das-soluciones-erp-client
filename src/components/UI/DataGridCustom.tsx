@@ -16,6 +16,7 @@ interface GenericDataGridProps<T extends MRT_RowData> {
 	onAdd?: () => void;
 	onEdit?: (row: { id: string; name: string }) => void;
 	onDelete?: (row: { id: string; name: string }) => void;
+	isLoading: boolean;
 }
 
 export const DataGridCustom = <T extends MRT_RowData>({
@@ -24,6 +25,7 @@ export const DataGridCustom = <T extends MRT_RowData>({
 	onAdd,
 	onEdit,
 	onDelete,
+	isLoading,
 }: GenericDataGridProps<T>) => {
 	const table = useMaterialReactTable({
 		columns,
@@ -42,6 +44,9 @@ export const DataGridCustom = <T extends MRT_RowData>({
 		initialState: {
 			showColumnFilters: false,
 			showGlobalFilter: false,
+		},
+		state: {
+			isLoading: isLoading,
 		},
 		paginationDisplayMode: 'pages',
 		positionToolbarAlertBanner: 'bottom',

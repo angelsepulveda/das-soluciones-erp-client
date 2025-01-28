@@ -1,1 +1,1 @@
-export * from './ModulesContainer.tsx';
+export * from './ModulesContainer';
