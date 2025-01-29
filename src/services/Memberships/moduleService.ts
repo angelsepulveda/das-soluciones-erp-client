@@ -1,13 +1,22 @@
 import BaseService from '../baseService.ts';
-import { TModuleDto } from '../../models';
+import { TModuleDto, TRegisterModulePayload } from '../../models';
 
 export enum modulesEndpoint {
-	getAll = 'modules',
-	register = 'modules',
+	modules = 'modules',
 }
 
-export const getAll = async (): Promise<TModuleDto[]> => {
+export const getAllModule = async (): Promise<TModuleDto[]> => {
 	const apiService = new BaseService();
-	const response = await apiService.get(modulesEndpoint.getAll);
+	const response = await apiService.get(modulesEndpoint.modules);
 	return response as TModuleDto[];
+};
+
+export const registerModule = async (
+	payload: TRegisterModulePayload,
+): Promise<void> => {
+	const apiService = new BaseService();
+	await apiService.post<TRegisterModulePayload>(
+		modulesEndpoint.modules,
+		payload,
+	);
 };

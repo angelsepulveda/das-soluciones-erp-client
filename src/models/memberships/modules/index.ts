@@ -1,1 +1,2 @@
-export * from './moduleDto.ts';
+export * from './moduleDto';
+export * from './registerModulePayload';

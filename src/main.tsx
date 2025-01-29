@@ -15,7 +15,7 @@ createRoot(document.getElementById('root')!).render(
 			<Routes>
 				<Route element={<PrivateLayout />}>
 					<Route path="/" element={<></>} />
-					<Route path="login" element={<ModulesContainer />} />
+					<Route path="modules" element={<ModulesContainer />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

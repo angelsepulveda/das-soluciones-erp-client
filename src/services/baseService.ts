@@ -40,6 +40,8 @@ class BaseService {
 				throw new Error(`HTTP error! status: ${response.status}`);
 			}
 
+			if (response.status === 201) return {} as Promise<T>;
+
 			return response.json() as Promise<T>;
 		} catch (error) {
 			console.error('Request failed:', error);
@@ -53,12 +55,12 @@ class BaseService {
 	}
 
 	// POST method
-	post<T>(
+	async post<T>(
 		endpoint: string,
 		body: any,
 		headers: Record<string, string> = {},
-	): Promise<T> {
-		return this.request<T>(endpoint, { method: 'POST', body, headers });
+	): Promise<void> {
+		await this.request<T>(endpoint, { method: 'POST', body, headers });
 	}
 
 	// PUT method

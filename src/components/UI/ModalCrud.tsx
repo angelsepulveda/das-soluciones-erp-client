@@ -23,6 +23,7 @@ type TModalCustomProps = {
 	children: ReactNode;
 	title: string;
 	handleSubmit: any;
+	isLoading: boolean;
 };
 
 export const ModalCrud = ({
@@ -31,6 +32,7 @@ export const ModalCrud = ({
 	children,
 	title,
 	handleSubmit,
+	isLoading,
 }: TModalCustomProps) => {
 	return (
 		<BootstrapDialog
@@ -56,7 +58,7 @@ export const ModalCrud = ({
 			</IconButton>
 			<DialogContent dividers>{children}</DialogContent>
 			<DialogActions>
-				<Button autoFocus onClick={handleSubmit}>
+				<Button autoFocus onClick={handleSubmit} loading={isLoading}>
 					Guardar
 				</Button>
 			</DialogActions>
