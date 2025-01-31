@@ -13,6 +13,7 @@ type TDeleteDialogProps = {
 	handleOk: VoidFunction;
 	message: string;
 	title: string;
+	isLoading: boolean;
 };
 
 export const DeleteDialog = ({
@@ -21,6 +22,7 @@ export const DeleteDialog = ({
 	open,
 	message,
 	title,
+	isLoading,
 }: TDeleteDialogProps) => {
 	return (
 		<Dialog
@@ -37,7 +39,7 @@ export const DeleteDialog = ({
 			</DialogContent>
 			<DialogActions>
 				<Button onClick={() => handleClose()}>Cancelar</Button>
-				<Button onClick={handleOk} autoFocus>
+				<Button onClick={handleOk} autoFocus loading={isLoading}>
 					Eliminar
 				</Button>
 			</DialogActions>

@@ -13,6 +13,7 @@ type TModuleContext = {
 	name: string;
 	moduleEdit: TModuleDto | null;
 	handleOpenClose: VoidFunction;
+	handleCloseDelete: VoidFunction;
 };
 
 export const ModuleContext = createContext<TModuleContext>({
@@ -26,4 +27,5 @@ export const ModuleContext = createContext<TModuleContext>({
 	moduleEdit: null,
 	handleEditModule: () => {},
 	handleOpenClose: () => {},
+	handleCloseDelete: () => {},
 });

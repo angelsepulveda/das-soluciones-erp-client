@@ -24,6 +24,11 @@ export const ModuleContextProvider: FC<{ children: ReactNode }> = ({
 		setOpenDelete(!openDelete);
 	};
 
+	const handleCloseDelete = () => {
+		setOpenDelete(false);
+		setIdDelete('');
+	};
+
 	const handleEditModule = (id: string, name: string): void => {
 		setModuleEdit({
 			id,
@@ -49,6 +54,7 @@ export const ModuleContextProvider: FC<{ children: ReactNode }> = ({
 			moduleEdit,
 			handleEditModule,
 			handleOpenClose,
+			handleCloseDelete,
 		}),
 		[open, idDelete, name, openDelete, name, moduleEdit],
 	);

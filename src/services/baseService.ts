@@ -42,6 +42,9 @@ class BaseService {
 
 			if (response.status === 201) return {} as Promise<T>;
 
+			if (response.status === 200 && method == 'DELETE')
+				return {} as Promise<T>;
+
 			return response.json() as Promise<T>;
 		} catch (error) {
 			console.error('Request failed:', error);
@@ -73,11 +76,11 @@ class BaseService {
 	}
 
 	// DELETE method
-	delete<T>(
+	async delete<T>(
 		endpoint: string,
 		headers: Record<string, string> = {},
-	): Promise<T> {
-		return this.request<T>(endpoint, { method: 'DELETE', headers });
+	): Promise<void> {
+		await this.request<T>(endpoint, { method: 'DELETE', headers });
 	}
 }
 

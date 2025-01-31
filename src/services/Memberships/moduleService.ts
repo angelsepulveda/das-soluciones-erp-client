@@ -20,3 +20,8 @@ export const registerModule = async (
 		payload,
 	);
 };
+
+export const deleteModule = async (id: string): Promise<void> => {
+	const apiService = new BaseService();
+	await apiService.delete(`modules/${id}`);
+};
